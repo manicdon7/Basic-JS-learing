@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URL Shortener</title>
+</head>
+<body>
+  <div>
+    <h1>URL Shortener</h1>
+    <input type="text" id="longUrl" placeholder="Enter URL">
+    <button onclick="shortenUrl()">Shorten</button>
+    <p>Shortened URL: <a id="shortenedUrl" href="" target="_blank"></a></p>
+  </div>
+  <script>
+    const urlMap = {}; // This object will act as our "database" to store the mappings
+
+    function generateShortCode() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        code += chars.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function shortenUrl() {
+      const longUrlInput = document.getElementById('longUrl');
+      const longUrl = longUrlInput.value.trim();
+
+      if (!longUrl) {
+        alert('Please enter a valid URL.');
+        return;
+      }
+
+      if (!/^https?:\/\//i.test(longUrl)) {
+        alert('Please enter a valid URL starting with http:// or https://');
+        return;
+      }
+
+      // Check if the URL is already shortened
+      for (const code in urlMap) {
+        if (urlMap[code] === longUrl) {
+          document.getElementById('shortenedUrl').innerText = window.location.href + code;
+          document.getElementById('shortenedUrl').href = urlMap[code];
+          return;
+        }
+      }
+
+      // Generate a new short code and store the mapping
+      const shortCode = generateShortCode();
+      urlMap[shortCode] = longUrl;
+
+      document.getElementById('shortenedUrl').innerText = window.location.href + shortCode;
+      document.getElementById('shortenedUrl').href = longUrl;
+    }
+  </script>
+</body>
+</html>
