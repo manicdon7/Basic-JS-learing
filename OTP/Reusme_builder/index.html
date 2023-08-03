@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Resume Builder</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+  <div class="resume-builder">
+    <h1>Online Resume Builder</h1>
+    <form id="resumeForm">
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+      
+      <label for="summary">Summary:</label>
+      <textarea id="summary" name="summary" rows="4" required></textarea>
+      
+      <label for="experience">Experience:</label>
+      <textarea id="experience" name="experience" rows="6" required></textarea>
+      
+      <label for="education">Education:</label>
+      <textarea id="education" name="education" rows="6" required></textarea>
+      
+      <button type="submit">Generate Resume</button>
+    </form>
+    
+    <div id="generatedResume">
+      <!-- The generated resume will be displayed here -->
+    </div>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+</html>
